@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="HospitalSimulatorClient.PatientRegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HospitalSimulatorClient"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500"
+             DataContext="{Binding PatientRegistration, Source={StaticResource Locator}}">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Patient Name:" Style="{StaticResource TextBlockLableStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="0" Width="300" HorizontalAlignment="Left" Margin="10" Text="{Binding PatientName}"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Patient Condition:" Style="{StaticResource TextBlockLableStyle}" />
+            <ComboBox Grid.Column="1" 
+                      Grid.Row="1" 
+                      Style="{StaticResource ComboBoxStyle}"
+                      ItemsSource="{Binding ConditionType}" 
+                      SelectedItem="{Binding SelectedCondition}" 
+                      SelectedIndex="0" />
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Topology:" Style="{StaticResource TextBlockLableStyle}"/>
+            <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Topology}" SelectedItem="{Binding SelectedTopology}" SelectedIndex="0" IsEnabled="{Binding TopologyEnabled}" Width="300" HorizontalAlignment="Left" Margin="10" />
+            <Button Grid.Column="1" Grid.Row="3" Name="SubmitButton" Content="Register" Style="{StaticResource ActionButtonStyle}" Command="{Binding RegisterPatient}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding ResultMessage}" TextWrapping="Wrap" Margin="10,20,10,10" FontSize="16"/>
+        </Grid>
+    </Grid>
+</UserControl>
